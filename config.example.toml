@@ -1,0 +1,47 @@
+# Copy to config.toml and edit. The file holds session keys: keep it private.
+
+[server]
+host = "127.0.0.1"
+port = 1700                   # Semtech UDP port of the Gateway Bridge
+
+[gateway]
+eui = "0102030405060708"      # register this gateway on the network server
+keepalive_s = 10
+stat_interval_s = 30          # gateway status; match the server's stats interval
+
+[device]                      # ABP, LoRaWAN 1.0.x
+dev_addr = "01020304"
+nwk_skey = "00112233445566778899aabbccddeeff"
+app_skey = "ffeeddccbbaa99887766554433221100"
+fport = 1
+payload = "74657374"          # hex
+
+[network]                     # must match the network server settings
+region = "EU868"              # EU868, AS923-1, AS923-2, AS923-3, AS923-4
+rx1_delay_s = 1
+rx1_dr_offset = 0
+# rx2_frequency_hz = 869525000   # default: the region's RX2
+# rx2_dr = 0
+# downlink_dwell_time = false    # AS923 only
+
+[test]
+timeout_s = 5
+packets = 10                  # sent for every case, each with a new frame counter
+interval_s = 5                # pause between packets
+# state_file = "config.state.json"
+
+[[case]]
+name = "control-lora"
+control = true                # a channel known to work; runs first
+frequency_hz = 868100000
+modulation = "LORA"
+sf = 7
+bw_khz = 125
+coding_rate = "4/5"
+
+[[case]]
+name = "fsk"
+frequency_hz = 868800000
+modulation = "FSK"
+bitrate = 50000
+# Optional in every case: rssi, chan, rfch (and snr for LoRa)

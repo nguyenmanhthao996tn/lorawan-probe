@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lorawan-probe"
+version = "0.1.0"
+description = "Emulated LoRaWAN gateway and ABP device that tests which channels a network server supports"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = ["cryptography>=41"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.urls]
+Repository = "https://github.com/nguyenmanhthao996tn/lorawan-probe"
+
+[project.scripts]
+lorawan-probe = "lorawan_probe.cli:main"
+
+[tool.setuptools]
+packages = ["lorawan_probe"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "tests"]
